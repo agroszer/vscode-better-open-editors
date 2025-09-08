@@ -90,6 +90,22 @@
           "type": "boolean",
           "default": true,
           "description": "Skips the workspace tree level if you have only one folder opened. But it could be useful to disable this setting if you want to see the package info for the workspace folder."
+        },
+        "betterOpenEditors.TabNumbering": {
+          "order": 10,
+          "type": "string",
+          "enum": [
+            "none",
+            "left",
+            "right"
+          ],
+          "enumDescriptions": [
+            "No numbering.",
+            "Tab index to the left of the filename.",
+            "Tab index to the right of the filename."
+          ],
+          "default": "none",
+          "description": "Adds numbering to the tabs."
         }
       }
     },
@@ -173,7 +189,42 @@
       {
         "command": "betterOpenEditors.showUnknownFileInfo",
         "title": "Show UnknownFile info"
-      }
+      },
+      { "command": "betterOpenEditors.showTab1", "title": "Show Tab 1" },
+      { "command": "betterOpenEditors.showTab2", "title": "Show Tab 2" },
+      { "command": "betterOpenEditors.showTab3", "title": "Show Tab 3" },
+      { "command": "betterOpenEditors.showTab4", "title": "Show Tab 4" },
+      { "command": "betterOpenEditors.showTab5", "title": "Show Tab 5" },
+      { "command": "betterOpenEditors.showTab6", "title": "Show Tab 6" },
+      { "command": "betterOpenEditors.showTab7", "title": "Show Tab 7" },
+      { "command": "betterOpenEditors.showTab8", "title": "Show Tab 8" },
+      { "command": "betterOpenEditors.showTab9", "title": "Show Tab 9" },
+      { "command": "betterOpenEditors.showTaba", "title": "Show Tab a" },
+      { "command": "betterOpenEditors.showTabb", "title": "Show Tab b" },
+      { "command": "betterOpenEditors.showTabc", "title": "Show Tab c" },
+      { "command": "betterOpenEditors.showTabd", "title": "Show Tab d" },
+      { "command": "betterOpenEditors.showTabe", "title": "Show Tab e" },
+      { "command": "betterOpenEditors.showTabf", "title": "Show Tab f" },
+      { "command": "betterOpenEditors.showTabg", "title": "Show Tab g" },
+      { "command": "betterOpenEditors.showTabh", "title": "Show Tab h" },
+      { "command": "betterOpenEditors.showTabi", "title": "Show Tab i" },
+      { "command": "betterOpenEditors.showTabj", "title": "Show Tab j" },
+      { "command": "betterOpenEditors.showTabk", "title": "Show Tab k" },
+      { "command": "betterOpenEditors.showTabl", "title": "Show Tab l" },
+      { "command": "betterOpenEditors.showTabm", "title": "Show Tab m" },
+      { "command": "betterOpenEditors.showTabn", "title": "Show Tab n" },
+      { "command": "betterOpenEditors.showTabo", "title": "Show Tab o" },
+      { "command": "betterOpenEditors.showTabp", "title": "Show Tab p" },
+      { "command": "betterOpenEditors.showTabq", "title": "Show Tab q" },
+      { "command": "betterOpenEditors.showTabr", "title": "Show Tab r" },
+      { "command": "betterOpenEditors.showTabs", "title": "Show Tab s" },
+      { "command": "betterOpenEditors.showTabt", "title": "Show Tab t" },
+      { "command": "betterOpenEditors.showTabu", "title": "Show Tab u" },
+      { "command": "betterOpenEditors.showTabv", "title": "Show Tab v" },
+      { "command": "betterOpenEditors.showTabw", "title": "Show Tab w" },
+      { "command": "betterOpenEditors.showTabx", "title": "Show Tab x" },
+      { "command": "betterOpenEditors.showTaby", "title": "Show Tab y" },
+      { "command": "betterOpenEditors.showTabz", "title": "Show Tab z" }
     ],
     "menus": {
       "view/title": [

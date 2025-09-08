@@ -2,6 +2,10 @@
 
 ## Release Notes
 
+### unreleased
+
+  * Feature: Add optional tab numbering and switching
+
 ### 1.12.0
 
   * Feature: Add "Collapse all" button to Better Open Editors panel (fixes #32)

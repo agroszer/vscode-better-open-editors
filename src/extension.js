@@ -91,6 +91,34 @@ function activate(context) {
 	vscode.commands.registerCommand('betterOpenEditors.showUnknownFileInfo', (message) => {
 		vscode.window.showWarningMessage(message);
 	});
+
+	// Helper function to show a numbered tab
+	// We add our own implementation here, because VS code only supports 1..9
+	// a...z comes very handy for hotkeys like ctrl+q a
+	function _showNumberedTab(index) {
+		const activeTabGroup = vscode.window.tabGroups.activeTabGroup;
+		if (activeTabGroup) {
+			const tabs = activeTabGroup.tabs;
+			if (index > 0 && index <= tabs.length) {
+				const tabToShow = tabs[index - 1]; // -1 because tabs array is 0-based
+				if (tabToShow && tabToShow.input && tabToShow.input.uri) {
+					vscode.window.showTextDocument(tabToShow.input.uri, { preview: true, preserveFocus: false, viewColumn: tabToShow.group.viewColumn });
+				}
+			}
+		}
+	}
+
+	// Register commands for 1-9 and a-z
+	for (let tabIndex = 1; tabIndex <= 35; tabIndex++) { // 1-9 for numbers, 10-35 for a-z
+		let commandSuffix;
+
+		if (tabIndex <= 9) {
+			commandSuffix = tabIndex;
+		} else { // tabIndex >= 10 && tabIndex <= 35
+			commandSuffix = String.fromCharCode(97 + (tabIndex - 10)); // 97 is ASCII for 'a'
+		}
+		vscode.commands.registerCommand(`betterOpenEditors.showTab${commandSuffix}`, () => _showNumberedTab(tabIndex));
+	}
 }
 
 // this method is called when your extension is deactivated

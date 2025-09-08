@@ -125,6 +125,28 @@ module.exports = class File extends Base {
 			}
 		}
 
+		const tabNumbering = config.get('TabNumbering');
+		if (tabNumbering !== 'none') {
+			const tabIndex = tab.group.tabs.indexOf(tab) + 1; // +1 because index is 0-based
+			const displayIndex = this._getDisplayIndex(tabIndex);
+
+			if (tabNumbering === 'left') {
+				this.label = `[${displayIndex}] ${this.label}`;
+			} else if (tabNumbering === 'right') {
+				this.label = `${this.label} [${displayIndex}]`;
+			}
+		}
+
 		this.label = tab.isPreview ? helper.makeItalic(this.label) : this.label;
+	}
+
+	_getDisplayIndex(tabIndex) {
+		if (tabIndex >= 1 && tabIndex <= 9) {
+			return tabIndex;
+		} else if (tabIndex >= 10 && tabIndex <= 35) { // 'a' is 10, 'z' is 35
+			return String.fromCharCode(97 + (tabIndex - 10)); // 97 is ASCII for 'a'
+		} else {
+			return tabIndex; // Fallback for numbers beyond 'z'
+		}
 	}
 }
