@@ -65,9 +65,11 @@ class TreeviewPanel {
 		
 					// update the icon
 					const fileItem = this.flat.files[helper.getId(tab)];
-					fileItem.update(tab);
-					this.#updateContextValue(fileItem);
-					this.#dataProvider.refresh();
+					if (fileItem) {
+						fileItem.update(tab);
+						this.#updateContextValue(fileItem);
+						this.#dataProvider.refresh();
+					}
 				})
 			}
 		});

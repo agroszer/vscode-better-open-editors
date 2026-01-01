@@ -18,6 +18,7 @@ module.exports = class File extends Base {
 		this.id         = helper.getId(tab);
 		this.path       = helper.getPath(tab.input);
 		this.sortKey    = this.path.toLowerCase();
+		this.internalLabel = this.path;
 
 		// standard items
 		if  (typeof tab.input.uri !== 'undefined') {
