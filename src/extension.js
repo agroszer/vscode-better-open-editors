@@ -1,7 +1,7 @@
-const vscode		= require('vscode');
-const helper        = require ('./helpers');
-const TreeviewPanel	= require('./treeviewPanel');
-const QuickPick		= require('./QuickPick.js');
+const vscode = require('vscode');
+const helper = require('./helpers');
+const TreeviewPanel = require('./treeviewPanel');
+const QuickPick = require('./QuickPick.js');
 
 function activate(context) {
 	const treeviewPanel = new TreeviewPanel(context);
@@ -23,11 +23,14 @@ function activate(context) {
 		treeviewPanel.recreateTree();
 	});
 
-	vscode.commands.registerCommand('betterOpenEditors.showTab', (input, tabGroupIndex) => {
+	vscode.commands.registerCommand('betterOpenEditors.showTab', async (input, tabGroupIndex) => {
 		if (typeof tabGroupIndex === 'object') {
-			vscode.window.showTextDocument(input, tabGroupIndex);
+			await vscode.window.showTextDocument(input, tabGroupIndex);
+			if (!tabGroupIndex.preserveFocus) {
+				await vscode.commands.executeCommand('workbench.action.focusActiveEditorGroup');
+			}
 		} else {
-			vscode.window.showTextDocument(input, tabGroupIndex, true);
+			await vscode.window.showTextDocument(input, tabGroupIndex, true);
 		}
 	});
 
@@ -87,7 +90,7 @@ function activate(context) {
 	vscode.commands.registerCommand('betterOpenEditors.openPackageFile', (treeItem) => {
 		vscode.commands.executeCommand('vscode.open', vscode.Uri.file(treeItem.packageData.packageFile));
 	});
-	
+
 	vscode.commands.registerCommand('betterOpenEditors.openFileOfCurrentPackage', () => {
 		quickPick.findFiles(vscode.window.tabGroups.activeTabGroup.activeTab);
 	});
@@ -126,7 +129,7 @@ function activate(context) {
 }
 
 // this method is called when your extension is deactivated
-function deactivate() {}
+function deactivate() { }
 
 module.exports = {
 	activate,

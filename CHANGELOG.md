@@ -2,13 +2,10 @@
 
 ## Release Notes
 
-### unreleased
+### 1.14.0
 
   * Feature: Add optional tab numbering and switching
   * Feature: Add configuration `betterOpenEditors.ActivateOnSelect` to activate the editor (put the focus) when clicking an item in the list
-
-### 1.15.0
-
   * Feature: Update dependencies
 
 ### 1.12.0

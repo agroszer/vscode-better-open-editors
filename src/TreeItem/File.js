@@ -30,7 +30,7 @@ module.exports = class File extends Base {
 
 			this.command = {
 				// "untitled" files cannot be handled via vscode.open :(
-				command: tab.input.uri.scheme === 'untitled' ? 'betterOpenEditors.showTab' : 'vscode.open',
+				command: 'betterOpenEditors.showTab',
 				title: 'Open',
 				arguments: [tab.input.uri, { viewColumn: tab.group.viewColumn, preserveFocus: preserveFocus }],
 			}
