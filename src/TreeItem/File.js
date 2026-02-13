@@ -27,7 +27,7 @@ module.exports = class File extends Base {
 
 			this.command = {
 				// "untitled" files cannot be handled via vscode.open :(
-				command: tab.input.uri.scheme === 'untitled' ? 'betterOpenEditors.showTab' : 'vscode.open',
+				command: tab.input.uri.scheme === 'untitled' ? 'betterOpenEditors.showTab' : 'betterOpenEditors.safeOpen',
 				title: 'Open',
 				arguments: [tab.input.uri, tab.group.viewColumn],
 			}
@@ -38,7 +38,7 @@ module.exports = class File extends Base {
 			this.resourceUri    = tab.input.original;
 
 			this.command = {
-				command: 'vscode.diff',
+				command: 'betterOpenEditors.safeDiff',
 				title: 'Open',
 				arguments: [tab.input.original, tab.input.modified, 'Differences', tab.group.viewColumn],
 			}
