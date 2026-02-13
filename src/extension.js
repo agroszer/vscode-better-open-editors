@@ -24,7 +24,11 @@ function activate(context) {
 	});
 
 	vscode.commands.registerCommand('betterOpenEditors.showTab', (input, tabGroupIndex) => {
-		vscode.window.showTextDocument(input, tabGroupIndex, true);
+		if (typeof tabGroupIndex === 'object') {
+			vscode.window.showTextDocument(input, tabGroupIndex);
+		} else {
+			vscode.window.showTextDocument(input, tabGroupIndex, true);
+		}
 	});
 
 	vscode.commands.registerCommand('betterOpenEditors.closeTab', (treeItem) => {
