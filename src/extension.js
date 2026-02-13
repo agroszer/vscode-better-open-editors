@@ -23,8 +23,12 @@ function activate(context) {
 		treeviewPanel.recreateTree();
 	});
 
-	vscode.commands.registerCommand('betterOpenEditors.showTab', (input, tabGroupIndex) => {
-		vscode.window.showTextDocument(input, tabGroupIndex, true);
+	vscode.commands.registerCommand('betterOpenEditors.showTab', async (input, tabGroupIndex) => {
+		try {
+			await vscode.window.showTextDocument(input, tabGroupIndex, true);
+		} catch (e) {
+			vscode.window.showErrorMessage(e.message);
+		}
 	});
 
 	vscode.commands.registerCommand('betterOpenEditors.closeTab', (treeItem) => {
@@ -80,12 +84,32 @@ function activate(context) {
 		vscode.commands.executeCommand('workbench.action.unpinEditor');
 	});
 
-	vscode.commands.registerCommand('betterOpenEditors.openPackageFile', (treeItem) => {
-		vscode.commands.executeCommand('vscode.open', vscode.Uri.file(treeItem.packageData.packageFile));
+	vscode.commands.registerCommand('betterOpenEditors.openPackageFile', async (treeItem) => {
+		try {
+			await vscode.commands.executeCommand('vscode.open', vscode.Uri.file(treeItem.packageData.packageFile));
+		} catch (e) {
+			vscode.window.showErrorMessage(e.message);
+		}
 	});
 	
 	vscode.commands.registerCommand('betterOpenEditors.openFileOfCurrentPackage', () => {
 		quickPick.findFiles(vscode.window.tabGroups.activeTabGroup.activeTab);
+	});
+
+	vscode.commands.registerCommand('betterOpenEditors.safeOpen', async (...args) => {
+		try {
+			await vscode.commands.executeCommand('vscode.open', ...args);
+		} catch (e) {
+			vscode.window.showErrorMessage(e.message);
+		}
+	});
+
+	vscode.commands.registerCommand('betterOpenEditors.safeDiff', async (...args) => {
+		try {
+			await vscode.commands.executeCommand('vscode.diff', ...args);
+		} catch (e) {
+			vscode.window.showErrorMessage(e.message);
+		}
 	});
 
 	vscode.commands.registerCommand('betterOpenEditors.showUnknownFileInfo', (message) => {
@@ -95,14 +119,18 @@ function activate(context) {
 	// Helper function to show a numbered tab
 	// We add our own implementation here, because VS code only supports 1..9
 	// a...z comes very handy for hotkeys like ctrl+q a
-	function _showNumberedTab(index) {
+	async function _showNumberedTab(index) {
 		const activeTabGroup = vscode.window.tabGroups.activeTabGroup;
 		if (activeTabGroup) {
 			const tabs = activeTabGroup.tabs;
 			if (index > 0 && index <= tabs.length) {
 				const tabToShow = tabs[index - 1]; // -1 because tabs array is 0-based
 				if (tabToShow && tabToShow.input && tabToShow.input.uri) {
-					vscode.window.showTextDocument(tabToShow.input.uri, { preview: true, preserveFocus: false, viewColumn: tabToShow.group.viewColumn });
+					try {
+						await vscode.window.showTextDocument(tabToShow.input.uri, { preview: true, preserveFocus: false, viewColumn: tabToShow.group.viewColumn });
+					} catch (e) {
+						vscode.window.showErrorMessage(e.message);
+					}
 				}
 			}
 		}
