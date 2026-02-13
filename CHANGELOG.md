@@ -7,6 +7,10 @@
   * Feature: Add optional tab numbering and switching
   * Feature: Add configuration `betterOpenEditors.ActivateOnSelect` to activate the editor (put the focus) when clicking an item in the list
 
+### 1.15.0
+
+  * Feature: Update dependencies
+
 ### 1.12.0
 
   * Feature: Add "Collapse all" button to Better Open Editors panel (fixes #32)
