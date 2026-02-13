@@ -25,11 +25,14 @@ module.exports = class File extends Base {
 			this.internalLabel  = this.path;
 			this.resourceUri    = tab.input.uri;
 
+			const config = vscode.workspace.getConfiguration('betterOpenEditors');
+			const preserveFocus = !config.get('ActivateOnSelect');
+
 			this.command = {
 				// "untitled" files cannot be handled via vscode.open :(
 				command: tab.input.uri.scheme === 'untitled' ? 'betterOpenEditors.showTab' : 'vscode.open',
 				title: 'Open',
-				arguments: [tab.input.uri, tab.group.viewColumn],
+				arguments: [tab.input.uri, { viewColumn: tab.group.viewColumn, preserveFocus: preserveFocus }],
 			}
 
 		// two editors items
@@ -37,10 +40,13 @@ module.exports = class File extends Base {
 			this.internalLabel  = this.path;
 			this.resourceUri    = tab.input.original;
 
+			const config = vscode.workspace.getConfiguration('betterOpenEditors');
+			const preserveFocus = !config.get('ActivateOnSelect');
+
 			this.command = {
 				command: 'vscode.diff',
 				title: 'Open',
-				arguments: [tab.input.original, tab.input.modified, 'Differences', tab.group.viewColumn],
+				arguments: [tab.input.original, tab.input.modified, 'Differences', { viewColumn: tab.group.viewColumn, preserveFocus: preserveFocus }],
 			}
 
 			// add description
