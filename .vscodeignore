@@ -1,0 +1,12 @@
+.vscode/**
+.vscode-test/**
+test/**
+src/test/**
+.gitignore
+.eslintrc.js
+.eslintignore
+jsconfig.json
+package-lock.json
+**/*.map
+node_modules/vsce/**
+node_modules/eslint/**
