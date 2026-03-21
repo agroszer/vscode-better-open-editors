@@ -18,7 +18,7 @@ module.exports = class UnknownFile extends Base {
 		super();
 		
 		this.addContextValue('unknownfile');
-		this.id				= tab.label;
+		this.id				= tab.group.viewColumn + '-' + (tab.label || 'Unknown');
 		this.tab        	= tab;
 
 		this.command = {
@@ -29,9 +29,9 @@ At the moment it is not possible to switch to this tab because the VS Code API d
 
 If you would like to support me in my request to make this possible, please leave a like or comment on the following ticket:
 https://github.com/microsoft/vscode/issues/158853
-`, this.tab],
+`],
 		}
 
-		this.label = helper.makeItalic(tab.label);
+		this.label = helper.makeItalic(tab.label || 'Unknown');
 	}
 }

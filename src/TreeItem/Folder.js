@@ -57,7 +57,7 @@ module.exports = class Folder extends Base {
 				this.description = `${packageData.name} ${packageData.version}`;
 
 				if (config.get('HidePackagePath')) {
-					this.label = '';
+					this.label = '\u200b';
 				}
 			}
 		}

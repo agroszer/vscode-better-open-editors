@@ -28,7 +28,7 @@ module.exports = class Workspace extends Base {
 				this.description = `${packageData.name} ${packageData.version}`;
 
 				if (config.get('HidePackagePath')) {
-					this.label = '';
+					this.label = '\u200b';
 				}
 			}
 		}

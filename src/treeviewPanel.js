@@ -111,11 +111,13 @@ class TreeviewPanel {
 		const originalTabs = vscode.window.tabGroups.all.map(group => group.tabs).flat();
 
 		let tabs = originalTabs.filter(tab => {
-			// keep images
-			if (typeof tab.input !== 'undefined' && typeof tab.input.viewType === 'string' && tab.input.viewType === 'imagePreview.previewEditor') return true;
+			if (typeof tab.input === 'undefined') return false;
 
-			// filter virtual elements like "Keyboard Shortcuts" or "Markdown preview" as we don't know of which file this is the preview
-			if (typeof tab.input !== 'undefined' && typeof tab.input.viewType === 'undefined') return true;
+			// keep standard files or diffs
+			if (typeof tab.input.uri !== 'undefined' || typeof tab.input.original !== 'undefined') return true;
+
+			// keep images
+			if (typeof tab.input.viewType === 'string' && tab.input.viewType === 'imagePreview.previewEditor') return true;
 
 			return false;
 		});

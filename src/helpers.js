@@ -8,11 +8,13 @@ const $path = require('path');
  * @returns {string} a normalized path which is the main path for this input object
  */
 exports.getPath = (input) => {
-	if (typeof input.uri !== 'undefined') {
+	if (input && typeof input.uri !== 'undefined') {
 		return input.uri.fsPath;
 		// diff items
-	} else if (typeof input.original !== 'undefined') {
+	} else if (input && typeof input.original !== 'undefined') {
 		return input.original.fsPath;
+	} else if (input && typeof input.viewType !== 'undefined') {
+		return input.viewType;
 	} else {
 		return '';
 	}
@@ -30,8 +32,11 @@ exports.getId = (tab) => {
 		// diff items
 	} else if (tab.input && typeof tab.input.original !== 'undefined') {
 		return tab.group.viewColumn + '-' + tab.input.original.fsPath + '|' + tab.input.modified.fsPath;
+	} else if (tab.input && typeof tab.input.viewType !== 'undefined') {
+		return tab.group.viewColumn + '-' + tab.input.viewType + '-' + tab.label;
 	}
-	return null;
+	// Fallback to avoid null ID which crashes VS Code tree views
+	return tab.group.viewColumn + '-unknown-' + tab.label;
 };
 
 /**
